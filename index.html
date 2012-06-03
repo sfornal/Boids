@@ -7,7 +7,7 @@
 </head>
 <body>
 	
-	<div id="page-wrap">
+	<div class="outer-wrap dark-bg">
 
 		<header>
 			<h1>Boids Algorithm Demo</h1>
@@ -16,13 +16,26 @@
 			<p>This demo was created as an exercise. I am attempting to learn a bit more about programming in JavaScript, and using the <code>&lt;canvas&gt;</code> element in particular.</p>
 		</header>
 		
-		<h3 class="canvas-heading">Boids in Action</h3>
+		</div><!-- end of .outer-wrap .dark-bg -->
+		
+		<div class="outer-wrap light-bg">
+		
+		<section id="main" class="inner-col">
+			<h3 class="canvas-heading">Boids in Action</h3>
 		
 		<div id="canvas-wrap">
-			<canvas id="boids" width="300" height="300"></canvas>
+			<canvas id="boids"></canvas>
 		</div><!-- end of #canvas-wrap -->
 
-	</div><!-- end of #page-wrap -->
+		</section>
+		
+	</div><!-- end of .outer-wrap .light-bg -->
+	
+	<div class="outer-wrap dark-bg">		
+		<footer class="inner-col">
+			<p>&copy;2012 Stephen Fornal &mdash; <a href="http://creativecommons.org/licenses/by-sa/3.0/us/">CC BY-SA 3.0</a></p>
+		</footer>
+	</div>
 	
 	<script src="boids.js"></script>
 	

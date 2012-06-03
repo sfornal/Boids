@@ -1,44 +1,103 @@
-body
-{
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
 	margin: 0;
 	padding: 0;
-	background-image: -webkit-linear-gradient(#0000ff 0%, #000000 37.09%);
-	background-image: -moz-linear-gradient(#0000ff 0%, #000000 37.09%);
-	background-image: linear-gradient(#0000ff 0%, #000000 37.09%);
-	background-attachment: fixed;
-	background-repeat: no-repeat;
-	background-size: cover;
-	background-position: top center;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/*
+	The following styles were crafted by Stephen Fornal, drawing inspiration from the design of a GitHub page, but
+	without looking at the mark-up for the page. It was an experiment to see if he could replicate it.
+*/
+
+
+body
+{
 	font: 15px/1.0 sans-serif;
 }
 
-#page-wrap
+.outer-wrap
 {
-	width: 80%;
-	max-width: 800px;
-	min-width: 350px;
-	margin: 10px auto;
-	background: #eaeaea;
-	border: 3px solid white;
-	-moz-box-sizing: border-box;
-	-webkit-box-sizing: border-box;
-	box-sizing: border-box;
-	-moz-border-radius: 25px;
-	-webkit-border-radius: 25px;
-	border-radius: 25px;
-	overflow: hidden;
+	width: 100%;
+	margin: 0;
+	padding: 0;
 }
 
-header
+.light-bg
 {
-	background-color: white;
+	background: #eaeaea;
+}
+
+.dark-bg
+{
+	background: #333 url(img/texture.png);
+}
+
+.inner-col
+{
+	width: 50%;
+	max-width: 800px;
+	min-width: 350px;
+	margin: 0 auto;
+}
+
+header, footer
+{
+	color: white;
 	padding: 20px;
 }
 
-h1 
+header h1
 {
-	margin: 0;
-	padding: 0;
+	font-size: 5em;
+	margin: 0 0 10px 0;
+}
+
+header h2
+{
+	font-size: 1.5em;
 }
 
 code
@@ -79,6 +138,11 @@ pre
 .canvas-heading
 {
 	text-align: center;
+}
+
+#main
+{
+	padding: 20px;
 }
 
 #boids

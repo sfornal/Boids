@@ -150,23 +150,3 @@ Boids.Vector2.prototype.heading = function()
 	"use strict";
 	return Math.atan2(this.y, this.x);
 };
-
-
-
-/**
-	A Bird "class". Represents a point in space that moves according
-	to a velocity vector. The velocity is changed according to an acceleration
-	vector, calculated using the rules of the classic "boids" algorithm.
-	@param x The x position of this Bird
-	@param y The y position of this Bird
-	@param vx The x component of this Bird's velocity
-	@param vy The y component of this Bird's velocity
-	@param color The color to draw this bird in, a string value
-*/
-Boids.Bird = function(x, y, vx, vy, color)
-{
-	"use strict";
-	this.pos = new Boids.Vector2(x, y);
-	this.vel = new Boids.Vector2(vx, vy);
-	this.style = color;
-};

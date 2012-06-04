@@ -139,10 +139,10 @@ a:hover, a:focus, a:active
 code
 {
 	font-family: Consolas, Inconsolata, Monaco, monospace;
-	background-color: #4e54ee;
+	background-color: rgba(78, 84, 238, 0.2);
 	color: white;
-	border: 1px solid white;
-	padding: 0 3px;
+	border: 1px solid rgba(255, 255, 255, 0.2);
+	padding: 3px;
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
 	border-radius: 5px;
@@ -156,10 +156,14 @@ pre
 	white-space: pre-wrap;
 	padding: 10px;
 	background: #4e54ee;
-	color: white;
+	border: 1px solid;
+	color: rgba(255, 255, 255, 0.9);
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
 	border-radius: 5px;
+	font-family: Consolas, Inconsolata, Monaco, monospace;
+	font-size: 12px;
+	line-height: 1.1em;
 }
 
 #canvas-wrap
@@ -188,6 +192,15 @@ pre
 	font-size: 1.5em;
 	margin-bottom: 20px;
 	color: white;
+	font-weight: bold;
+}
+
+#main h3
+{
+	font-size: 1.3em;
+	margin-bottom: 20px;
+	color: white;
+	font-variant: small-caps;
 }
 
 #main p
@@ -195,7 +208,7 @@ pre
 	color: white;
 	margin-bottom: 10px;
 	text-align: justify;
-	line-height: 1.2em;
+	line-height: 1.6em;
 }
 
 #demo h2

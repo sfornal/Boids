@@ -150,3 +150,16 @@ Boids.Vector2.prototype.heading = function()
 	"use strict";
 	return Math.atan2(this.y, this.x);
 };
+
+/**
+	Gets the distance from this vector to another vector.
+	@param The other vector
+	@return The distance
+*/
+Boids.Vector2.prototype.distance = function(v)
+{
+	var dx = v.x - this.x;
+	var dy = v.y - this.y;
+	
+	return Math.sqrt(dx * dx + dy * dy);
+};

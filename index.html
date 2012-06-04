@@ -3,7 +3,8 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Boids Algorithm Demo</title>
-	<link rel="stylesheet" href="boids.css" />
+	<link rel="stylesheet" href="css/boids.css" />
+	<link rel="stylesheet" href="css/prettify.css" />
 </head>
 <body class="dark-bg">
 	
@@ -40,11 +41,11 @@
 				in 2-dimensional space, a <code>Bird</code> class that would be composed of a <code>Vector2</code> for position and velocity, and a <code>World</code> class that would have a collection of <code>Bird</code> objects and run the animation.
 			</p>
 			
-			<p>I am using a "name space" object called <code>Boids</code> to act as a container for all of my classes and such.</p>
+			<p>I am using a "name space" object called <code>Boids</code> to act as a container for all of my classes and such. Because I'm working quickly, I have the <code>Bird</code> and <code>World</code> objects tightly coupled. It is probably not the best design ever, but I am more interested in getting it to work than I am in a perfectly designed set of encapsulated objects. The only reason the <code>World</code> is a class at all is that, in theory, you could have multiple canvas elements, each with their own simulation. In reality, the performance will probably suck too much.</p>
 			
 			<h3>Vector2 Class</h3>
 			<p>I implemented a simple 2-D vector class (I opted to ignore 3-D for now, since I don't intend to render in 3-D), with basic vector operation like addition, subtraction, dot product, and scale.</p>
-<pre title="Vector2D Class">
+<pre title="Vector2D Class" class="prettyprint linenums">
 /** Boids is the name space function. Give a hoot, don't pollute! */
 var Boids = Boids || {};
 
@@ -127,7 +128,6 @@ Boids.Vector2.prototype.sub = function(v)
 	@param v The vector to subtract
 	@return The result as a new vector
 */
-
 Boids.Vector2.prototype.subNew = function(v)
 {
 	"use strict";
@@ -205,8 +205,16 @@ Boids.Vector2.prototype.heading = function()
 		</footer>
 	</div>
 	
-	<script src="boids.vector2.js"></script>
-	<script src="boids.bird.js"></script>
+	<script src="script/boids.vector2.js"></script>
+	<script src="script/boids.bird.js"></script>
+	<script src="script/boids.world.js"></script>
+	<script charset="utf-8">
+		window.addEventListener('load', function()
+		{
+			var demo = new Boids.World('boids');
+			demo.animate();
+		}, true);
+	</script>
 	
 </body>
 </html>

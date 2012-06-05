@@ -35,7 +35,12 @@ Boids.World = function(elem, options)
 		this.numBirds = options ? options.numBirds || 50 : 50;
 		this.maxVel = options ? options.maxVel || 4 : 4;
 		this.bgColor = options ? options.bgColor || "rgba(0, 0, 0, 1.0)" : "rgba(0, 0, 0, 1.0)";
-		this.neighborDist = options ? options.neighborDist || 100 : 100;
+		this.birdColor = options ? options.birdColor || false : false;
+		this.neighborDist = options ? options.neighborDist || 50 : 50;
+		this.avoidDist = options ? options.avoidDist || 10 : 10;
+		this.avoidWeight = options ? options.avoidWeight || 0.05 : 0.05;
+		this.positionWeight = options ? options.positionWeight || 0.005 : 0.005;
+		this.headingWeight = options ? options.headingWeight || 0.01 : 0.01;
 		/* TODO: More options :) */
 		
 		this.birds = [];
@@ -50,7 +55,7 @@ Boids.World = function(elem, options)
 			var green = Math.floor(Math.random() * 156) + 100;
 			var blue = Math.floor(Math.random() * 156) + 100;
 			var alpha = Math.random() * 0.5 + 0.5;
-			var color = "rgba(" + red + ", " + green + ", " + blue + ", " + alpha + ")";
+			var color = this.birdColor ? this.birdColor : "rgba(" + red + ", " + green + ", " + blue + ", " + alpha + ")";
 			this.birds.push(new Boids.Bird(this, x, y, vx, vy, color));
 		}
 	}	

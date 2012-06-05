@@ -34,7 +34,7 @@ Boids.Bird.prototype.getFlock = function()
 	{
 		var b = this.world.birds[i];
 		
-		if (this.pos.dist(b.pos) < this.world.neighborDist)
+		if (b !== this && this.pos.distance(b.pos) < this.world.neighborDist)
 		{
 			myFlock.push(b);
 		}
@@ -75,7 +75,62 @@ Boids.Bird.prototype.update = function()
 {
 	"use strict";
 	
+	/* Get neighbors */
+	var flock = this.getFlock();	
+	/* First rule - steer towards center mass */
+	var position = new Boids.Vector2();
+	/* Second rule - steer towards common heading */
+	var heading = new Boids.Vector2();
+	/* Third rule - steer away from collisions */
+	var collide = new Boids.Vector2();
+	/* Fourth rule - stay in bounds */
+	var bounds = new Boids.Vector2();
+	
+	for (var i = 0; i < flock.length; i += 1)
+	{
+		var b = flock[i];
+		/* Add position and vel of other bird to total */
+		position.add(b.pos);
+		heading.add(b.vel);
+		
+		/* Check to see if we're too close to other bird */
+		var toward = b.pos.subNew(this.pos);
+		if (toward.mag() < this.world.avoidDist)
+		{
+			toward.scale(this.world.avoidWeight);
+			collide.sub(toward);
+		}
+	}
+	
+	/* Calculate average vector for neighbors, and scale by predefined weights */
+	if (flock.length > 0)
+	{
+		position.scale(1 / flock.length).sub(this.pos).scale(this.world.positionWeight);
+		heading.scale(1 / flock.length).sub(this.vel).scale(this.world.headingWeight);
+	}
+	
+	/* Check if the bird went off screen, and steer back on if needed */
+	if (this.pos.x < 0)
+	{
+		bounds.x = 0.25;
+	}
+	else if (this.pos.x > this.world.canvas.width)
+	{
+		bounds.x = -0.25;
+	}
+	
+	if (this.pos.y < 0)
+	{
+		bounds.y = 0.25;
+	}
+	else if (this.pos.y > this.world.canvas.height)
+	{
+		bounds.y = -0.25;
+	}
+	
+	/* Now, add these vectors to vel, then limit to max vel */
+	this.vel.add(position).add(heading).add(collide).add(bounds).limit(this.world.maxVel);	
+	
+	/* Finally, update position according to velocity */
 	this.pos.add(this.vel);
-	this.pos.x = (this.pos.x + this.world.canvas.width) % this.world.canvas.width;
-	this.pos.y = (this.pos.y + this.world.canvas.height) % this.world.canvas.height;
 };

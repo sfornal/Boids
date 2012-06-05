@@ -163,3 +163,19 @@ Boids.Vector2.prototype.distance = function(v)
 	
 	return Math.sqrt(dx * dx + dy * dy);
 };
+
+/**
+	This is a convenience method to limit this vectors magnitude.
+	This method mutates the vector.
+	@param lim The maximum magnitude allowed.
+	@return This vector, for chaining.
+*/
+Boids.Vector2.prototype.limit = function(lim)
+{
+	if (this.mag() > lim)
+	{
+		this.norm().scale(lim);
+	}
+	
+	return this;
+};

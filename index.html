@@ -21,11 +21,17 @@
 		<div class="outer-wrap light-bg">
 		
 		<section id="demo" class="inner-col">
-			<h2>Boids in Action</h2>
+			<h2>Default Boids</h2>
 		
-		<div id="canvas-wrap">
-			<canvas id="boids"></canvas>
-		</div><!-- end of #canvas-wrap -->
+			<div class="canvas-wrap">
+				<canvas id="boids1"></canvas>
+			</div><!-- end of .canvas-wrap -->
+		
+			<h2>Customized Boids</h2>
+		
+			<div class="canvas-wrap">
+				<canvas id="boids2"></canvas>
+			</div><!-- end of .canvas-wrap -->
 
 		</section>
 		
@@ -35,12 +41,9 @@
 	
 		<section id="main" class="inner-col">
 			<h2>About the Code</h2>
-			<p>Since this is mainly an exercise in writing "object-oriented" style Javascript, I started by
-				deciding what classes I would need. I settled on a <code>Vector2</code> class that would represent a vector
-				in 2-dimensional space, a <code>Bird</code> class that would be composed of a <code>Vector2</code> for position and velocity, and a <code>World</code> class that would have a collection of <code>Bird</code> objects and run the animation.
-			</p>
+			<p>Since this is mainly an exercise in writing "object-oriented" style Javascript, I started by deciding what classes I would need. I settled on a <code>Vector2</code> class that would represent a vector in 2-dimensional space, a <code>Bird</code> class that would be composed of a <code>Vector2</code> for position and velocity, and a <code>World</code> class that would have a collection of <code>Bird</code> objects and run the animation.</p>
 			
-			<p>I am using a "name space" object called <code>Boids</code> to act as a container for all of my classes and such. Because I'm working quickly, I have the <code>Bird</code> and <code>World</code> objects tightly coupled. It is probably not the best design ever, but I am more interested in getting it to work than I am in a perfectly designed set of encapsulated objects. The only reason the <code>World</code> is a class at all is that, in theory, you could have multiple canvas elements, each with their own simulation. In reality, the performance will probably suck too much.</p>
+			<p>I am using a "name space" object called <code>Boids</code> to act as a container for all of my classes and such. Because I'm working quickly, I have the <code>Bird</code> and script/boids.world.js<code>World</code> objects tightly coupled. It is probably not the best design ever, but I am more interested in getting it to work than I am in a perfectly designed set of encapsulated objects. The only reason the <code>World</code> is a class at all is that, in theory, you could have multiple canvas elements, each with their own simulation. In reality, the performance will probably suck too much.</p>
 			
 			<h3>Vector2 Class</h3>
 			<p>I implemented a simple 2-D vector class (I opted to ignore 3-D for now, since I don't intend to render in 3-D), with basic vector operation like addition, subtraction, dot product, and scale.</p>
@@ -55,7 +58,10 @@
 			<p><a href="script/boids.world.js" title="World Source Code" class="button">View Source</a></p>
 			
 			<h3>Kicking Things Off</h3>
-			<p>To start things up, I create a <code>World</code> object in the <code>window.load</code> event, and fire up its animation loop. Everything seems to load up quickly, and in testing on a variety of devices, I am pleased with the result. Thanks for looking.</p>
+			<p>To start things up, I create a <code>World</code> object in the <code>window.load</code> event, and fire up its animation loop. Everything seems to load up quickly, and in testing on a variety of devices, I am pleased with the result. There are two demo canvases, one using a default <code>World</code> object, and one using an object that received an option object as a parameter.</p>
+			
+			<p><a href="script/boids.js" title="Event Binding Source Code" class="button">View Source</a></p>
+			<p>Thanks for looking.</p>
 			
 			
 			
@@ -69,13 +75,7 @@
 	<script src="script/boids.vector2.js"></script>
 	<script src="script/boids.bird.js"></script>
 	<script src="script/boids.world.js"></script>
-	<script charset="utf-8">
-		window.addEventListener('load', function()
-		{
-			var demo = new Boids.World('boids', { numBirds: 100 });
-			demo.animate();
-		}, true);
-	</script>
+	<script src="script/boids.js"></script>
 	
 </body>
 </html>

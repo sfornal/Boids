@@ -4,7 +4,6 @@
 	<meta charset="UTF-8">
 	<title>Boids Algorithm Demo</title>
 	<link rel="stylesheet" href="css/boids.css" />
-	<link rel="stylesheet" href="css/prettify.css" />
 </head>
 <body class="dark-bg">
 	
@@ -45,159 +44,21 @@
 			
 			<h3>Vector2 Class</h3>
 			<p>I implemented a simple 2-D vector class (I opted to ignore 3-D for now, since I don't intend to render in 3-D), with basic vector operation like addition, subtraction, dot product, and scale.</p>
-<pre title="Vector2D Class" class="prettyprint linenums">
-/** Boids is the name space function. Give a hoot, don't pollute! */
-var Boids = Boids || {};
-
-/**
-	A simplistic 2-D Vector implementation, written
-	for the practice.
-	@param dx The x component of the vector, defaults to 0
-	@param dy The y component of the vector, defaults to 0
-*/
-Boids.Vector2 = function(dx, dy)
-{
-	"use strict";
-	this.x = dx || 0;
-	this.y = dy || 0;
-};
-
-/**
-	Return a string in the form "x: n y: n"
-	@return The string representation of this vector
-*/
-Boids.Vector2.prototype.toString = function()
-{
-	"use strict";
-	return "x: " + this.x + " y: " + this.y;
-};
-
-/**
-	Returns a copy of this vector.
-	@return A copy of this vector
-*/
-Boids.Vector2.prototype.copy = function()
-{
-	"use strict";
-	return new Boids.Vector2(this.x, this.y);
-};
-
-/**
-	Adds another vector to this vector.
-	This method mutates the current vector.
-	@param v The vector to add
-	@return This vector for chaining
-*/
-Boids.Vector2.prototype.add = function(v)
-{
-	"use strict";
-	this.x += v.x;
-	this.y += v.y;
-	return this;
-};
-
-/**
-	Adds a vector to this vector, and returns the result
-	as a new vector. addNew() does not mutate this vector.
-	@param v The vector to add
-	@return The result as a new vector
-*/
-Boids.Vector2.prototype.addNew = function(v)
-{
-	"use strict";
-	return this.copy().add(v);
-};
-
-/**
-	Subtracts another vector from this vector.
-	This method mutates the current vector.
-	@param v The vector to subtract
-	@return This vector for chaining
-*/
-Boids.Vector2.prototype.sub = function(v)
-{
-	"use strict";
-	this.x -= v.x;
-	this.y -= v.y;
-	return this;
-};
-
-/**
-	Subtracts a vector from this vector, and returns the result
-	as a new vector. subNew() does not mutate this vector.
-	@param v The vector to subtract
-	@return The result as a new vector
-*/
-Boids.Vector2.prototype.subNew = function(v)
-{
-	"use strict";
-	return this.copy().sub(v);
-};
-
-/**
-	Scales this vector by a scalar value. scale() mutates this vector.
-	@param sc The scalar value
-	@return This vector, for chaining
-*/
-Boids.Vector2.prototype.scale = function(sc)
-{
-	"use strict";
-	this.x *= sc;
-	this.y *= sc;
-	return this;
-};
-
-/**
-	Calculates the scalar product of two vectors.
-	@param v The vector to "dot" with this vector
-	@return The scalar product
-*/
-Boids.Vector2.prototype.dot = function(v)
-{
-	"use strict";
-	return this.x * v.x + this.y * v.y;
-};
-
-/**
-	Returns the magnitude of this vector
-	@return The magnitude of this vector
-*/
-Boids.Vector2.prototype.mag = function()
-{
-	"use strict";
-	return Math.sqrt(this.dot(this));
-};
-
-/**
-	Normalize this vector, changing it to a unit vector.
-	@return This vector, for chaining
-*/
-Boids.Vector2.prototype.norm = function()
-{
-	"use strict";
-	return this.scale(1 / this.mag());
-};
-
-/**
-	Get a normalized copy of this vector.
-	@return A normalized copy of this vector
-*/
-Boids.Vector2.prototype.normNew = function()
-{
-	"use strict";
-	return this.copy().norm();
-};
-
-/**
-	Get the heading (in radians) of this vector.
-	@return The heading of this vector
-*/
-Boids.Vector2.prototype.heading = function()
-{
-	"use strict";
-	return Math.atan2(this.y, this.x);
-};
-</pre>			
+			<p><a href="script/boids.vector2.js" title="Vector2 Source Code" class="button">View Source</a></p>
+			
+			<h3>Bird Class</h3>
+			<p>The <code>Bird</code> class encapsulates the movement and rendering rules for the boids. Each boid has a position and velocity, which are <code>Vector2</code> objects, as well as an optional color. Each <code>Bird</code> provides a method that causes it to calculate its new position by updating velocity, then updating position. It also provides a method for rendering itself, currently implemented as an arrow pointing in the direction it's moving.</p>
+			<p><a href="script/boids.bird.js" title="Bird Source Code" class="button">View Source</a></p>
+			
+			<h3>World Class</h3>
+			<p>The <code>World</code> class manages all of the birds, and takes care of the <code>&lt;canvas&gt;</code> and the animation loop. This was the part that was the hardest to figure out. I originally tried to use <code>setInterval</code> to control the animation, but the performance sucked! After a little research, I came across the <code>requestAnimationFrame</code> function, and the polyfill that makes it work cross-browser. That improved the rendering a bit. I also inadvertently improved my understanding of closures in the process.</p>
+			<p><a href="script/boids.world.js" title="World Source Code" class="button">View Source</a></p>
+			
+			<h3>Kicking Things Off</h3>
+			<p>To start things up, I create a <code>World</code> object in the <code>window.load</code> event, and fire up its animation loop. Everything seems to load up quickly, and in testing on a variety of devices, I am pleased with the result. Thanks for looking.</p>
+			
+			
+			
 		</section>
 			
 		<footer class="inner-col">
@@ -211,7 +72,7 @@ Boids.Vector2.prototype.heading = function()
 	<script charset="utf-8">
 		window.addEventListener('load', function()
 		{
-			var demo = new Boids.World('boids');
+			var demo = new Boids.World('boids', { numBirds: 100 });
 			demo.animate();
 		}, true);
 	</script>

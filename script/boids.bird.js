@@ -52,15 +52,15 @@ Boids.Bird.prototype.render = function(gr)
 	"use strict";
 	
 	gr.save();
-	gr.fillStyle = this.style;
+	gr.strokeStyle = this.style;
 	gr.translate(this.pos.x, this.pos.y);
 	gr.rotate(this.vel.heading());
 	
 	gr.beginPath();
-	gr.moveTo(-5, 0);
-	gr.lineTo(5, 0);
+	gr.moveTo(-5, 0.5);
+	gr.lineTo(5, 0.5);
 	gr.lineTo(3, 2);
-	gr.moveTo(5, 0);
+	gr.moveTo(5, 0.5);
 	gr.lineTo(3, -2);
 	gr.stroke();
 	gr.restore();
@@ -73,6 +73,8 @@ Boids.Bird.prototype.render = function(gr)
 */
 Boids.Bird.prototype.update = function()
 {
+	"use strict";
+	
 	this.pos.add(this.vel);
 	this.pos.x = (this.pos.x + this.world.canvas.width) % this.world.canvas.width;
 	this.pos.y = (this.pos.y + this.world.canvas.height) % this.world.canvas.height;

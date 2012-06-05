@@ -25,26 +25,34 @@ Boids.World = function(elem, options)
 		*/
 		this.canvas.width = this.canvas.offsetWidth;
 		this.canvas.height = this.canvas.offsetHeight;
-	}
+		
+		this.graphics = this.canvas.getContext('2d');
 	
-	this.graphics = this.canvas.getContext('2d');
-	
-	
-	this.numBirds = options ? options.numBirds || 50 : 50;
-	this.maxVel = options ? options.maxVel || 4 : 4;
-	this.bgColor = options ? options.bgColor || "rgb(255, 255, 255)" : "rgb(255, 255, 255)";
-	this.neighborDist = options ? options.neighborDist || 100 : 100;
-	/* TODO: More options :) */
-	
-	this.birds = [];
-	
-	for(var i = 0; i < this.numBirds; i += 1)
-	{
-		var x = Math.random() * this.canvas.width;
-		var y = Math.random() * this.canvas.height;
-		var vx = Math.random() * 2 * this.maxVel - this.maxVel;
-		var vy = Math.random() * 2 * this.maxVel - this.maxVel;
-		this.birds.push(new Boids.Bird(this, x, y, vx, vy, "rgba(0, 0, 0, 0.9)"));
+		/*
+			Use options from parameters if available, otherwise
+			use interesting defaults
+		*/
+		this.numBirds = options ? options.numBirds || 50 : 50;
+		this.maxVel = options ? options.maxVel || 4 : 4;
+		this.bgColor = options ? options.bgColor || "rgba(0, 0, 0, 1.0)" : "rgba(0, 0, 0, 1.0)";
+		this.neighborDist = options ? options.neighborDist || 100 : 100;
+		/* TODO: More options :) */
+		
+		this.birds = [];
+		
+		for(var i = 0; i < this.numBirds; i += 1)
+		{
+			var x = Math.random() * this.canvas.width;
+			var y = Math.random() * this.canvas.height;
+			var vx = Math.random() * 2 * this.maxVel - this.maxVel;
+			var vy = Math.random() * 2 * this.maxVel - this.maxVel;
+			var red = Math.floor(Math.random() * 156) + 100;
+			var green = Math.floor(Math.random() * 156) + 100;
+			var blue = Math.floor(Math.random() * 156) + 100;
+			var alpha = Math.random() * 0.5 + 0.5;
+			var color = "rgba(" + red + ", " + green + ", " + blue + ", " + alpha + ")";
+			this.birds.push(new Boids.Bird(this, x, y, vx, vy, color));
+		}
 	}	
 };
 
@@ -53,6 +61,8 @@ Boids.World = function(elem, options)
 */
 Boids.World.prototype.animate = function()
 {
+	"use strict";
+	
 	var world = this;
 	requestAnimationFrame(function(){ world.animate(); });
 	this.render();
@@ -64,6 +74,8 @@ Boids.World.prototype.animate = function()
 */
 Boids.World.prototype.render = function()
 {
+	"use strict";
+	
 	var gr = this.graphics;
 	
 	gr.save();
@@ -81,10 +93,14 @@ Boids.World.prototype.render = function()
 };
 
 /**
-	requestAnimationFrame polyfill by Erik Möller, Opera engineer
-
+	requestAnimationFrame polyfill by Erik Moller, Opera engineer.
+	Found this on Paul Irish's blog page, and it was easier than
+	trying to write my own. :)
 */
-(function() {
+(function()
+{
+	"use strict";
+	
     var lastTime = 0;
     var vendors = ['ms', 'moz', 'webkit', 'o'];
     for(var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {

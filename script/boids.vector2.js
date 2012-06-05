@@ -158,6 +158,8 @@ Boids.Vector2.prototype.heading = function()
 */
 Boids.Vector2.prototype.distance = function(v)
 {
+	"use strict";
+	
 	var dx = v.x - this.x;
 	var dy = v.y - this.y;
 	
@@ -172,6 +174,8 @@ Boids.Vector2.prototype.distance = function(v)
 */
 Boids.Vector2.prototype.limit = function(lim)
 {
+	"use strict";
+	
 	if (this.mag() > lim)
 	{
 		this.norm().scale(lim);
